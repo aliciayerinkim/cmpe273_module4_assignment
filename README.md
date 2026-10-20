@@ -59,32 +59,7 @@ The stock at the start is `apple: 10`, `banana: 5`, `laptop: 2`.
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    Client([Client / curl])
-
-    subgraph OrderSvc[Order Service :8000]
-        O[Order API]
-        ODB[(orders<br/>in-memory)]
-        O --- ODB
-    end
-
-    subgraph InvSvc[Inventory Service :8001]
-        I[Inventory API]
-        IDB[(stock<br/>in-memory)]
-        I --- IDB
-    end
-
-    subgraph NotifSvc[Notification - stub]
-        N[Notification stub<br/>logs the event]
-        NDB[(sent notifications<br/>future)]
-        N --- NDB
-    end
-
-    Client -- "POST /orders (REST, command)" --> O
-    O -- "GET /inventory/item?quantity=N (REST, query)" --> I
-    O -. "OrderCreated event" .-> N
-```
+<img width="1115" height="505" alt="image" src="https://github.com/user-attachments/assets/71b8b5b4-f788-4687-8251-310f539d514d" />
 
 ## Component Responsibilities
 
